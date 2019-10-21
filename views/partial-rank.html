@@ -1,0 +1,22 @@
+<form name="ranking-form" action="/update" method="POST">
+    <table style="width:100%">
+        <tr>
+            <th>Topic</th>
+            <th>Ranking</th>
+        </tr>
+        <tr>
+            ${rankData.map(topic => `
+            <td>${topic.topic}</td>
+            <td>
+                ${rankStatusData.map(status =>
+                    <label ${topic.rank === status.rank ? `class="active"` : ''}>
+                        ${status.rank}
+                            <input type="radio" name="${topic.topic}" value="${status_id}" ${topic.rank === status.rank ? "checked" : ''}>
+                    </label>
+                `).join('')}
+                </td>
+            </tr>
+                `).join('')}
+    </table>
+    <button type="submit">Update Rankings</button>       
+</form>
