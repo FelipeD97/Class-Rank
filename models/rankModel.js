@@ -1,22 +1,18 @@
 const db = require("./conn.js");
 
 class Ranking {
-    constructor(id, topic, rank) {
+    constructor(id, name, rate) {
         this.id = id;
-        this.topic = topic;
-        this.rank = rank;
+        this.name = name;
+        this.rate = rate;
     }
 
     static async getAll() {
         try {
-            const response = await db.any(`SELECT topic.id,
-                    topic.topic,
-                    topic.status_id,
-                    ranking.rank FROM topic
-                    INNER JOIN ranking ON topic.status_id = ranking.id
-                    ORDER BY topic.id;`);
+            const response = await db.any(`SELECT * FROM topic`);
+            console.log("response is ", response);
             return response;
-
+            
         } catch(err) {
             return err.message;
         }
@@ -32,14 +28,16 @@ class Ranking {
         }
     }
 
-    static async update(topic, rank) {
+    static async update(topic, rate) {
         const infoUpdate = `UPDATE topic SET status_id=${rate} WHERE topic= '${topic}'`
 
         try {
             const response = await db.any(infoUpdate);
+            console.log("response is", response);
             return response;
 
         } catch(err) {
+            console.log("ERROR", err.message);
             return err.message;
         }
     }

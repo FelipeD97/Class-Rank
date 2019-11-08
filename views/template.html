@@ -4,13 +4,22 @@
         <title>Express Demo | ${title}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"/>
         <link rel="stylesheet" href="./stylesheets/style.css">
     </head>
-    <body>
+    <body> 
         <nav class="navbar main-nav title--bar" role="navigation" aria-label="main navigation">
             <div class="navbar-start title--content">
+                <ul>
+                    ${!!isLoggedIn ? `
+                        <li><a class="navbar-item" href="/users/logout">Logout</a></li>
+                    ` : `
+                        <li><a class="navbar-item" href="/users/login">Login</a></li>
+                        <li><a class="navbar-item" href="/users/signup">Sign-Up</a></li>
+                    `} 
+                </ul>
                 <a class="navbar-item" href='/'>Home</a>
-                <a class="navbar-item" href='/rank'>Class Rank</a>
+                <a class="navbar-item" href='/rank'>Class Rank</a>  
             </div>
         </nav>
         <h1 class="container">${title}</h1>

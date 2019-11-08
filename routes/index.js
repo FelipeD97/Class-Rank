@@ -4,7 +4,9 @@ const express = require('express'),
   router.get('/', function(req, res, next) {
     res.render('template', { 
         locals: {
-          title: 'Welcome to Class Rank!' 
+          title: 'Welcome to Class Rank!',
+          isLoggedIn: req.session.is_logged_in,
+          userName: req.session.first_name
         },
         partials: {
           partial: "partial-index"

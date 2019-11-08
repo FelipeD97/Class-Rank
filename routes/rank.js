@@ -9,7 +9,8 @@ router.get('/', async (req, res, next) => {
   res.render("template", {
       locals: {
           title: "Class Ranking",
-          rankdata: rankData,
+          isLoggedIn: req.session.is_logged_in,
+          rankData: rankData,
           rankStatusData: rankStatusData
       },
       partials: {
@@ -19,11 +20,13 @@ router.get('/', async (req, res, next) => {
 });
 
 router.post("/update", (req, res) => {
-  for (let key in req.body) {
+
+    console.log(req.body);
+  for (let key of req.body) {
     RankingModel.update(key, req.body[key]);
   }
 
-  res.status(200).redirect("/");
+  res.redirect("/");
 });
 
 
